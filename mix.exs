@@ -14,7 +14,13 @@ defmodule VkConfSend.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger]]
+    [applications:
+        [:logger,
+         :nadia,
+         :postgrex,
+         :ecto
+        ]
+    ]
   end
 
   # Dependencies can be Hex packages:
@@ -28,9 +34,11 @@ defmodule VkConfSend.Mixfile do
   # Type "mix help deps" for more examples and options
   defp deps do
     [{:httpoison, "~> 0.9.0"},
-     {:poison, "~> 3.0"},
+     {:poison, "~> 3.0", override: true},
      {:httpotion, "~> 3.0.0"},
-     {:nadia, "~> 0.3"}
+     {:nadia, "~> 0.4.2"},
+     {:postgrex, ">= 0.0.0"},
+     {:ecto, "~> 2.0.0"}
      ]
   end
 end

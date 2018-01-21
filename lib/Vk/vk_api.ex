@@ -6,16 +6,18 @@ defmodule VkRequest do
     response.body
   end
   def process_url(cmd) do
-    VkStatic.apiaddr <> cmd <> "&access_token=" <> Static.token
+    VkStatic.apiaddr <> cmd
   end
 
   def process_response_body body do
     body |> Poison.decode!
   end
 
-  def get_updates ts, pts do
-    res = request :get, "messages.getLongPollHistory?ts=" <> Integer.to_string(ts)  <>
-                                                  "&pts=" <> Integer.to_string(pts)
+  def get_updates ts, pts, token do
+    res = request :get, "messages.getLongPollHistory?" <>
+                      "ts="  <> Integer.to_string(ts)  <>
+                      "&pts="<> Integer.to_string(pts) <>
+                      "&access_token=" <> token
     res["response"]
   end
   def get_ts do
